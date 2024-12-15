@@ -78,7 +78,7 @@ INSERT INTO rooms (room_id, room_number, room_type, status) VALUES
 (113, 4, 'Standard', 'disponible'),
 (114, 5, 'Suite', 'disponible');
 
----
+```sql
 
 ## **Instalación y Ejecución**
 
