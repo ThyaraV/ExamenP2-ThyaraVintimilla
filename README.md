@@ -132,9 +132,9 @@ Inicia la API REST:
 node server.js
 ```
 Prueba los endpoints con Postman:
--Crear reserva (POST): http://localhost:8086/reservations
--Consultar reserva (GET): http://localhost:8086/reservations/1
--Cancelar reserva (DELETE): http://localhost:8086/reservations/1
+Crear reserva (POST): http://localhost:8086/reservations
+Consultar reserva (GET): http://localhost:8086/reservations/1
+Cancelar reserva (DELETE): http://localhost:8086/reservations/1
 ---
 ### **4. Ejecución del Microservicio de Inventario**
 Dirígete a la carpeta del microservicio:
