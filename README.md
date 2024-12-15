@@ -78,8 +78,7 @@ INSERT INTO rooms (room_id, room_number, room_type, status) VALUES
 (113, 4, 'Standard', 'disponible'),
 (114, 5, 'Suite', 'disponible');
 
-```sql
-
+```
 ## **Instalación y Ejecución**
 
 ### **1. Clonar el Proyecto**
@@ -88,32 +87,76 @@ Clona el repositorio en tu máquina local:
 ```bash
 git clone https://github.com/usuario/luxurystay.git
 cd luxurystay
-
+```
 ---
 
-### **1. Ejecución del servicio SOAP**
+### **2. Ejecución del servicio SOAP**
 Dirígete a la carpeta del servicio SOAP:
 ```bash
 cd soap-service
-
+```
 Instala las dependencias
 ```bash
 npm install
-
+```
 Configura la conexión a la base de datos MySQL en el archivo db.js:
 ```bash
 const sequelize = new Sequelize('luxurystay_soap', 'usuario', 'contraseña', {
     host: 'localhost',
     dialect: 'mysql'
 });
-
+```
 Inicia el servidor SOAP:
 ```bash
 node server.js
-
+```
 ---
-
-
-
-
+### **3. Ejecución de la API REST**
+Dirígete a la carpeta del API REST:
+```bash
+cd rest-api
+```
+Instala las dependencias
+```bash
+npm install
+```
+Configura la conexión a la base de datos MySQL en el archivo db.js:
+```bash
+const sequelize = new Sequelize('luxurystay_api', 'usuario', 'contraseña', {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+```
+Inicia la API REST:
+```bash
+node server.js
+```
+Prueba los endpoints con Postman:
+-Crear reserva (POST): http://localhost:8086/reservations
+-Consultar reserva (GET): http://localhost:8086/reservations/1
+-Cancelar reserva (DELETE): http://localhost:8086/reservations/1
+---
+### **4. Ejecución del Microservicio de Inventario**
+Dirígete a la carpeta del microservicio:
+```bash
+cd inventory-service
+```
+Instala las dependencias
+```bash
+npm install
+```
+Configura la conexión a la base de datos MySQL en el archivo db.js:
+```bash
+const sequelize = new Sequelize('luxurystay_inventory', 'usuario', 'contraseña', {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+```
+Inicia la API REST:
+```bash
+node server.js
+```
+Prueba los endpoints con Postman:
+-Registrar habitación (POST): http://localhost:8087/rooms
+-Actualizar estado (PATCH): http://localhost:8087/rooms/101
 
