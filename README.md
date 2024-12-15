@@ -31,3 +31,89 @@ Ejecuta los siguientes comandos SQL en tu servidor MySQL para crear las bases de
 CREATE DATABASE luxurystay_soap;
 CREATE DATABASE luxurystay_api;
 CREATE DATABASE luxurystay_inventory;
+
+USE luxurystay_soap;
+CREATE TABLE availability (
+    room_id INT PRIMARY KEY,
+    room_type VARCHAR(50) NOT NULL,
+    available_date DATE NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+
+INSERT INTO availability (room_id, room_type, available_date, status) VALUES
+(110, 'Deluxe', '2024-12-20', 'disponible'),
+(111, 'Deluxe', '2024-12-21', 'disponible'),
+(112, 'Suite', '2024-12-22', 'disponible'),
+(113, 'Standard', '2024-12-23', 'disponible'),
+(114, 'Suite', '2024-12-24', 'mantenimiento');
+
+USE luxurystay_api;
+CREATE TABLE reservations (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    room_number INT NOT NULL,
+    customer_name VARCHAR(100) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+
+INSERT INTO reservations (reservation_id, room_number, customer_name, start_date, end_date, status) VALUES
+(1, 101, 'Juan Pérez', '2024-12-20', '2024-12-21', 'activa'),
+(2, 102, 'María Gómez', '2024-12-21', '2024-12-22', 'activa'),
+(3, 104, 'Carlos Ruiz', '2024-12-23', '2024-12-24', 'activa'),
+(4, 105, 'Ana Torres', '2024-12-24', '2024-12-25', 'cancelada');
+
+USE luxurystay_inventory;
+CREATE TABLE rooms (
+    room_id INT PRIMARY KEY,
+    room_number INT NOT NULL,
+    room_type VARCHAR(50) NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+
+INSERT INTO rooms (room_id, room_number, room_type, status) VALUES
+(110, 1, 'Deluxe', 'disponible'),
+(111, 2, 'Deluxe', 'disponible'),
+(112, 3, 'Suite', 'mantenimiento'),
+(113, 4, 'Standard', 'disponible'),
+(114, 5, 'Suite', 'disponible');
+
+---
+
+## **Instalación y Ejecución**
+
+### **1. Clonar el Proyecto**
+Clona el repositorio en tu máquina local:
+
+```bash
+git clone https://github.com/usuario/luxurystay.git
+cd luxurystay
+
+---
+
+### **1. Ejecución del servicio SOAP**
+Dirígete a la carpeta del servicio SOAP:
+```bash
+cd soap-service
+
+Instala las dependencias
+```bash
+npm install
+
+Configura la conexión a la base de datos MySQL en el archivo db.js:
+```bash
+const sequelize = new Sequelize('luxurystay_soap', 'usuario', 'contraseña', {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+
+Inicia el servidor SOAP:
+```bash
+node server.js
+
+---
+
+
+
+
+
