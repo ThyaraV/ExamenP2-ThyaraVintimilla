@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: luxurystay-db
+    environment:
+      MYSQL_ROOT_PASSWORD: T@vs2022
+      MYSQL_DATABASE: luxurystay
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  soap-service:
+    build: ./soap-service
+    container_name: soap-service
+    ports:
+      - "8085:8085"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=luxurystay_soap
+    depends_on:
+      - mysql
+
+  rest-api:
+    build: ./rest-api
+    container_name: rest-api
+    ports:
+      - "8086:8086"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=luxurystay_api
+    depends_on:
+      - mysql
+      - soap-service
+
+  inventory-service:
+    build: ./inventory-service
+    container_name: inventory-service
+    ports:
+      - "8087:8087"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=luxurystay_inventory
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
