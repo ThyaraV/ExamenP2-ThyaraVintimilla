@@ -153,7 +153,7 @@ const sequelize = new Sequelize('luxurystay_inventory', 'usuario', 'contraseña'
     dialect: 'mysql'
 });
 ```
-Inicia la API REST:
+Inicia el microservicio:
 ```bash
 node server.js
 ```
